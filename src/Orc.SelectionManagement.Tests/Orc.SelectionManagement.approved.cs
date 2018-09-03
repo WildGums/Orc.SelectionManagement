@@ -8,6 +8,7 @@ namespace Orc.SelectionManagement
 {
     public interface ISelectionManager<T>
     {
+        bool AllowMultiSelect { get; set; }
         public event System.EventHandler<Orc.SelectionManagement.SelectionChangedEventArgs<T>> SelectionChanged;
         void Add(System.Collections.Generic.IEnumerable<T> items, string scope = null);
         void Clear(string scope = null);
@@ -20,6 +21,7 @@ namespace Orc.SelectionManagement
         public static void Add<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string scope = null) { }
         public static T GetSelectedItem<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, string scope = null) { }
         public static void Remove<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string scope = null) { }
+        public static void Replace<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string scope = null) { }
     }
     public class SelectionChangedEventArgs<T> : System.EventArgs
     {

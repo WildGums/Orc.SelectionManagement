@@ -28,6 +28,18 @@
             selectionManager.Add(new[] { item }, scope);
         }
 
+        public static void Replace<T>(this ISelectionManager<T> selectionManager, T item, string scope = null)
+        {
+            Argument.IsNotNull(() => selectionManager);
+
+            if (ReferenceEquals(item, null))
+            {
+                return;
+            }
+
+            selectionManager.Replace(new[] { item }, scope);
+        }
+
         public static void Remove<T>(this ISelectionManager<T> selectionManager, T item, string scope = null)
         {
             Argument.IsNotNull(() => selectionManager);
