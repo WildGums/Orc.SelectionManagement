@@ -8,7 +8,7 @@
 
     internal class SelectionList<T>
     {
-        public readonly List<T> _selectionsList = new List<T>();
+        private readonly List<T> _selectionsList = new List<T>();
 
         private bool _allowMultiSelect;
 
