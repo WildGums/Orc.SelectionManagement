@@ -164,7 +164,7 @@ namespace Orc.SelectionManagement
 
             Log.Debug(stringBuilder.ToString());
 
-            SelectionChanged.SafeInvoke(this, e);
+            SelectionChanged?.Invoke(this, e);
         }
         #endregion
     }

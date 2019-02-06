@@ -176,7 +176,7 @@
 
         private void RaiseSelectionChangedEvent(IEnumerable<T> added, IEnumerable<T> removed)
         {
-            SelectionChanged.SafeInvoke(this, new SelectionChangedEventArgs<T>(added, removed, Scope));
+            SelectionChanged?.Invoke(this, new SelectionChangedEventArgs<T>(added, removed, Scope));
         }
 
         private void EnforceSelectionMode()
