@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0E1BD4B4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orc.SelectionManagement", "Orc.SelectionManagement\Orc.SelectionManagement.csproj", "{4886595E-C108-4DDD-A6C0-5850F275333E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orc.SelectionManagement.Example.NET", "Orc.SelectionManagement.Example.NET\Orc.SelectionManagement.Example.NET.csproj", "{DD06E129-2E18-4F15-936B-8EA7C097E8D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orc.SelectionManagement.Example", "Orc.SelectionManagement.Example\Orc.SelectionManagement.Example.csproj", "{DD06E129-2E18-4F15-936B-8EA7C097E8D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orc.SelectionManagement.Tests", "Orc.SelectionManagement.Tests\Orc.SelectionManagement.Tests.csproj", "{E5C4CCB8-C9B8-4B7A-8997-32E95635089A}"
 EndProject

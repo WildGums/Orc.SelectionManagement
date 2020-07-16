@@ -1,27 +1,27 @@
-﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.6", FrameworkDisplayName=".NET Framework 4.6")]
-public class static ModuleInitializer
+﻿[assembly: System.Resources.NeutralResourcesLanguage("en-US")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v3.1", FrameworkDisplayName="")]
+public static class ModuleInitializer
 {
     public static void Initialize() { }
 }
 namespace Orc.SelectionManagement
 {
-    public interface ISelectionManager<T>
-    {
-        bool AllowMultiSelect { get; set; }
-        public event System.EventHandler<Orc.SelectionManagement.SelectionChangedEventArgs<T>> SelectionChanged;
-        void Add(System.Collections.Generic.IEnumerable<T> items, string scope = null);
-        void Clear(string scope = null);
-        System.Collections.Generic.List<T> GetSelectedItems(string scope = null);
-        void Remove(System.Collections.Generic.IEnumerable<T> items, string scope = null);
-        void Replace(System.Collections.Generic.IEnumerable<T> items, string scope = null);
-    }
-    public class static ISelectionManagerExtensions
+    public static class ISelectionManagerExtensions
     {
         public static void Add<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string scope = null) { }
         public static T GetSelectedItem<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, string scope = null) { }
         public static void Remove<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string scope = null) { }
         public static void Replace<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string scope = null) { }
+    }
+    public interface ISelectionManager<T>
+    {
+        bool AllowMultiSelect { get; set; }
+        event System.EventHandler<Orc.SelectionManagement.SelectionChangedEventArgs<T>> SelectionChanged;
+        void Add(System.Collections.Generic.IEnumerable<T> items, string scope = null);
+        void Clear(string scope = null);
+        System.Collections.Generic.List<T> GetSelectedItems(string scope = null);
+        void Remove(System.Collections.Generic.IEnumerable<T> items, string scope = null);
+        void Replace(System.Collections.Generic.IEnumerable<T> items, string scope = null);
     }
     public class SelectionChangedEventArgs<T> : System.EventArgs
     {
