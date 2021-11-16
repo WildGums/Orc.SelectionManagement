@@ -92,7 +92,7 @@ namespace Orc.SelectionManagement
             {
                 var listsToCheck = new List<SelectionList<T>>();
 
-                if (_noScopeSelections != null)
+                if (_noScopeSelections is not null)
                 {
                     listsToCheck.Add(_noScopeSelections);
                 }

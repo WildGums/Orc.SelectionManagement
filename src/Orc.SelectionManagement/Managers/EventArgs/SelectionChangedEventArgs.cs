@@ -11,12 +11,12 @@
             Removed = new List<T>();
             Scope = scope;
 
-            if (added != null)
+            if (added is not null)
             {
                 Added.AddRange(added);
             }
 
-            if (removed != null)
+            if (removed is not null)
             {
                 Removed.AddRange(removed);
             }
