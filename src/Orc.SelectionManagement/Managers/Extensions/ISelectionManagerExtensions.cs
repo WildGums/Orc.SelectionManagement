@@ -1,10 +1,6 @@
 ﻿namespace Orc.SelectionManagement
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Catel;
 
     public static class ISelectionManagerExtensions
@@ -34,6 +30,7 @@
 
             if (ReferenceEquals(item, null))
             {
+                selectionManager.Clear();
                 return;
             }
 
