@@ -311,6 +311,34 @@
 
                 Assert.AreEqual(3, selectedItem);
             }
+
+            [TestCase]
+            public void SingleReplaceWithNullShouldClearSelection()
+            {
+                var addedItems = new List<object>();
+                var removedItems = new List<object>();
+
+                var selectionManager = new SelectionManager<object>
+                {
+                    AllowMultiSelect = true
+                };
+
+                selectionManager.Add(new[] 
+                {
+                    new object(),
+                    new object() 
+                });
+
+                selectionManager.SelectionChanged += (sender, e) =>
+                {
+                    addedItems.AddRange(e.Added);
+                    removedItems.AddRange(e.Removed);
+                };
+
+                selectionManager.Replace<object>(null);
+
+                Assert.AreEqual(0, selectionManager.GetSelectedItems().Count);
+            }
         }
 
         [TestFixture]
@@ -349,7 +377,7 @@
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
                 Assert.AreEqual(0, selectedItems.Count);
-                
+
                 var selectedItem = selectionManager.GetSelectedItem(scope);
 
                 Assert.AreEqual(0, selectedItem);
