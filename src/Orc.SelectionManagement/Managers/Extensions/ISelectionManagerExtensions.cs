@@ -1,20 +1,20 @@
 ﻿namespace Orc.SelectionManagement
 {
+    using System;
     using System.Linq;
-    using Catel;
 
     public static class ISelectionManagerExtensions
     {
-        public static T GetSelectedItem<T>(this ISelectionManager<T> selectionManager, string scope = null)
+        public static T? GetSelectedItem<T>(this ISelectionManager<T> selectionManager, string? scope = null)
         {
-            Argument.IsNotNull(() => selectionManager);
+            ArgumentNullException.ThrowIfNull(selectionManager);
 
             return selectionManager.GetSelectedItems(scope).LastOrDefault();
         }
 
-        public static void Add<T>(this ISelectionManager<T> selectionManager, T item, string scope = null)
+        public static void Add<T>(this ISelectionManager<T> selectionManager, T item, string? scope = null)
         {
-            Argument.IsNotNull(() => selectionManager);
+            ArgumentNullException.ThrowIfNull(selectionManager);
 
             if (ReferenceEquals(item, null))
             {
@@ -24,9 +24,9 @@
             selectionManager.Add(new[] { item }, scope);
         }
 
-        public static void Replace<T>(this ISelectionManager<T> selectionManager, T item, string scope = null)
+        public static void Replace<T>(this ISelectionManager<T> selectionManager, T item, string? scope = null)
         {
-            Argument.IsNotNull(() => selectionManager);
+            ArgumentNullException.ThrowIfNull(selectionManager);
 
             if (ReferenceEquals(item, null))
             {
@@ -37,9 +37,9 @@
             selectionManager.Replace(new[] { item }, scope);
         }
 
-        public static void Remove<T>(this ISelectionManager<T> selectionManager, T item, string scope = null)
+        public static void Remove<T>(this ISelectionManager<T> selectionManager, T item, string? scope = null)
         {
-            Argument.IsNotNull(() => selectionManager);
+            ArgumentNullException.ThrowIfNull(selectionManager);
 
             if (ReferenceEquals(item, null))
             {

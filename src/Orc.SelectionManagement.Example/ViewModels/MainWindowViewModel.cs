@@ -1,12 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MainWindowViewModel.cs" company="WildGums">
-//   Copyright (c) 2008 - 2015 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Orc.SelectionManagement.Example.ViewModels
+﻿namespace Orc.SelectionManagement.Example.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
@@ -27,8 +21,8 @@ namespace Orc.SelectionManagement.Example.ViewModels
         #region Constructors
         public MainWindowViewModel(ISelectionManager<int> intSelectionManager, ISelectionManager<string> stringSelectionManager)
         {
-            Argument.IsNotNull(() => intSelectionManager);
-            Argument.IsNotNull(() => stringSelectionManager);
+            ArgumentNullException.ThrowIfNull(intSelectionManager);
+            ArgumentNullException.ThrowIfNull(stringSelectionManager);
 
             _intSelectionManager = intSelectionManager;
             _stringSelectionManager = stringSelectionManager;

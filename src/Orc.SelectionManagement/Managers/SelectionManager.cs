@@ -1,38 +1,25 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProjectManager.cs" company="WildGums">
-//   Copyright (c) 2008 - 2015 WildGums. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-namespace Orc.SelectionManagement
+﻿namespace Orc.SelectionManagement
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Catel;
     using Catel.Logging;
 
     public class SelectionManager<T> : ISelectionManager<T>
     {
-        #region Fields
         private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly object _lockObject = new object();
         private readonly Dictionary<string, SelectionList<T>> _selectionsByScope = new Dictionary<string, SelectionList<T>>();
-        private SelectionList<T> _noScopeSelections;
+        private readonly SelectionList<T> _noScopeSelections;
 
         private bool _allowMultiSelect = true;
-        #endregion
 
-        #region Constructors
         public SelectionManager()
         {
-
+            _noScopeSelections = CreateSelectionList(null);
         }
-        #endregion
 
-        #region Properties
         public bool AllowMultiSelect
         {
             get { return _allowMultiSelect; }
@@ -48,39 +35,34 @@ namespace Orc.SelectionManagement
                 }
             }
         }
-        #endregion
 
-        #region Events
-        public event EventHandler<SelectionChangedEventArgs<T>> SelectionChanged;
-        #endregion
+        public event EventHandler<SelectionChangedEventArgs<T>>? SelectionChanged;
 
-        #region Methods
-
-        public List<T> GetSelectedItems(string scope = null)
+        public T[] GetSelectedItems(string? scope = null)
         {
             var selectionList = GetSelectionListForScope(scope);
             return selectionList.GetSelectedItems();
         }
 
-        public void Add(IEnumerable<T> items, string scope = null)
+        public void Add(IEnumerable<T> items, string? scope = null)
         {
             var selectionList = GetSelectionListForScope(scope);
             selectionList.Add(items);
         }
 
-        public void Replace(IEnumerable<T> items, string scope = null)
+        public void Replace(IEnumerable<T> items, string? scope = null)
         {
             var selectionList = GetSelectionListForScope(scope);
             selectionList.Replace(items);
         }
 
-        public void Remove(IEnumerable<T> items, string scope = null)
+        public void Remove(IEnumerable<T> items, string? scope = null)
         {
             var selectionList = GetSelectionListForScope(scope);
             selectionList.Remove(items);
         }
 
-        public void Clear(string scope = null)
+        public void Clear(string? scope = null)
         {
             var selectionList = GetSelectionListForScope(scope);
             selectionList.Clear();
@@ -90,12 +72,10 @@ namespace Orc.SelectionManagement
         {
             lock (_lockObject)
             {
-                var listsToCheck = new List<SelectionList<T>>();
-
-                if (_noScopeSelections is not null)
+                var listsToCheck = new List<SelectionList<T>>
                 {
-                    listsToCheck.Add(_noScopeSelections);
-                }
+                    _noScopeSelections
+                };
 
                 listsToCheck.AddRange(_selectionsByScope.Values);
 
@@ -103,17 +83,12 @@ namespace Orc.SelectionManagement
             }
         }
 
-        private SelectionList<T> GetSelectionListForScope(string scope)
+        private SelectionList<T> GetSelectionListForScope(string? scope)
         {
             lock (_lockObject)
             {
                 if (scope is null)
                 {
-                    if (_noScopeSelections is null)
-                    {
-                        _noScopeSelections = CreateSelectionList(null);
-                    }
-
                     return _noScopeSelections;
                 }
                 else
@@ -130,7 +105,7 @@ namespace Orc.SelectionManagement
             }
         }
 
-        private SelectionList<T> CreateSelectionList(string scope)
+        private SelectionList<T> CreateSelectionList(string? scope)
         {
             var selectionList = new SelectionList<T>(scope)
             {
@@ -142,20 +117,20 @@ namespace Orc.SelectionManagement
             return selectionList;
         }
 
-        private void OnSelectionListSelectionChanged(object sender, SelectionChangedEventArgs<T> e)
+        private void OnSelectionListSelectionChanged(object? sender, SelectionChangedEventArgs<T> e)
         {
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine($"Selection has changed for scope '{e.Scope}':");
 
-            stringBuilder.AppendLine($"  Added: ({e.Added.Count})");
+            stringBuilder.AppendLine($"  Added: ({e.Added.Length})");
 
             foreach (var added in e.Added)
             {
                 stringBuilder.AppendLine($"    - ({added})");
             }
 
-            stringBuilder.AppendLine($"  Removed: ({e.Removed.Count})");
+            stringBuilder.AppendLine($"  Removed: ({e.Removed.Length})");
 
             foreach (var removed in e.Removed)
             {
@@ -166,6 +141,5 @@ namespace Orc.SelectionManagement
 
             SelectionChanged?.Invoke(this, e);
         }
-        #endregion
     }
 }
