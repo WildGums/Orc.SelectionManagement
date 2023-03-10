@@ -26,7 +26,9 @@ namespace Orc.SelectionManagement.Example.Views
 
             logViewer.Level = LogEvent.Debug | LogEvent.Info | LogEvent.Warning | LogEvent.Error;
 
+#pragma warning disable IDISP001 // Dispose created
             var serviceLocator = this.GetServiceLocator();
+#pragma warning restore IDISP001 // Dispose created
 
             _intSelectionManager = serviceLocator.ResolveType<ISelectionManager<int>>();
             _stringSelectionManager = serviceLocator.ResolveType<ISelectionManager<string>>();

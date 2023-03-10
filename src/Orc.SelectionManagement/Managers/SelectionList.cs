@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Catel;
-    using Catel.Collections;
 
     internal class SelectionList<T>
     {
@@ -12,12 +10,12 @@
 
         private bool _allowMultiSelect;
 
-        public SelectionList(string scope)
+        public SelectionList(string? scope)
         {
             Scope = scope;
         }
 
-        public string Scope { get; private set; }
+        public string? Scope { get; private set; }
 
         public bool AllowMultiSelect
         {
@@ -33,19 +31,19 @@
             }
         }
 
-        public event EventHandler<SelectionChangedEventArgs<T>> SelectionChanged;
+        public event EventHandler<SelectionChangedEventArgs<T>>? SelectionChanged;
 
-        public List<T> GetSelectedItems()
+        public T[] GetSelectedItems()
         {
             lock (_selectionsList)
             {
-                return _selectionsList.ToList();
+                return _selectionsList.ToArray();
             }
         }
         
         public void Add(IEnumerable<T> items)
         {
-            Argument.IsNotNull(() => items);
+            ArgumentNullException.ThrowIfNull(items);
 
             lock (_selectionsList)
             {
@@ -93,7 +91,7 @@
 
         public void Replace(IEnumerable<T> items)
         {
-            Argument.IsNotNull(() => items);
+            ArgumentNullException.ThrowIfNull(items);
 
             lock (_selectionsList)
             {
@@ -130,7 +128,7 @@
 
         public void Remove(IEnumerable<T> items)
         {
-            Argument.IsNotNull(() => items);
+            ArgumentNullException.ThrowIfNull(items);
 
             lock (_selectionsList)
             {
@@ -174,7 +172,7 @@
             }
         }
 
-        private void RaiseSelectionChangedEvent(IEnumerable<T> added, IEnumerable<T> removed)
+        private void RaiseSelectionChangedEvent(IEnumerable<T>? added, IEnumerable<T>? removed)
         {
             SelectionChanged?.Invoke(this, new SelectionChangedEventArgs<T>(added, removed, Scope));
         }

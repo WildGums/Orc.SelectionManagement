@@ -40,7 +40,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(3, selectedItems.Count);
+                Assert.AreEqual(3, selectedItems.Length);
                 Assert.AreEqual(1, selectedItems[0]);
                 Assert.AreEqual(2, selectedItems[1]);
                 Assert.AreEqual(3, selectedItems[2]);
@@ -84,7 +84,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(6, selectedItems.Count);
+                Assert.AreEqual(6, selectedItems.Length);
                 Assert.AreEqual(4, selectedItems[0]);
                 Assert.AreEqual(5, selectedItems[1]);
                 Assert.AreEqual(6, selectedItems[2]);
@@ -100,7 +100,7 @@
             [TestCase(null)]
             [TestCase("A")]
             [TestCase("B")]
-            public void AddMultipleItemsWithMultiSelectDisabledAndEmptyStart(string scope)
+            public void AddMultipleItemsWithMultiSelectDisabledAndEmptyStart(string? scope)
             {
                 var addedItems = new List<int>();
                 var removedItems = new List<int>();
@@ -127,7 +127,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(1, selectedItems.Count);
+                Assert.AreEqual(1, selectedItems.Length);
                 Assert.AreEqual(3, selectedItems[0]);
 
                 var selectedItem = selectionManager.GetSelectedItem(scope);
@@ -168,7 +168,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(1, selectedItems.Count);
+                Assert.AreEqual(1, selectedItems.Length);
                 Assert.AreEqual(3, selectedItems[0]);
 
                 var selectedItem = selectionManager.GetSelectedItem(scope);
@@ -214,7 +214,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(0, selectedItems.Count);
+                Assert.AreEqual(0, selectedItems.Length);
 
                 var selectedItem = selectionManager.GetSelectedItem(scope);
 
@@ -251,7 +251,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(3, selectedItems.Count);
+                Assert.AreEqual(3, selectedItems.Length);
                 Assert.AreEqual(4, selectedItems[0]);
                 Assert.AreEqual(5, selectedItems[1]);
                 Assert.AreEqual(6, selectedItems[2]);
@@ -302,7 +302,7 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(3, selectedItems.Count);
+                Assert.AreEqual(3, selectedItems.Length);
                 Assert.AreEqual(1, selectedItems[0]);
                 Assert.AreEqual(2, selectedItems[1]);
                 Assert.AreEqual(3, selectedItems[2]);
@@ -310,6 +310,34 @@
                 var selectedItem = selectionManager.GetSelectedItem(scope);
 
                 Assert.AreEqual(3, selectedItem);
+            }
+
+            [TestCase]
+            public void SingleReplaceWithNullShouldClearSelection()
+            {
+                var addedItems = new List<object>();
+                var removedItems = new List<object>();
+
+                var selectionManager = new SelectionManager<object>
+                {
+                    AllowMultiSelect = true
+                };
+
+                selectionManager.Add(new[] 
+                {
+                    new object(),
+                    new object() 
+                });
+
+                selectionManager.SelectionChanged += (sender, e) =>
+                {
+                    addedItems.AddRange(e.Added);
+                    removedItems.AddRange(e.Removed);
+                };
+
+                selectionManager.Replace<object>(null);
+
+                Assert.AreEqual(0, selectionManager.GetSelectedItems().Length);
             }
         }
 
@@ -348,8 +376,8 @@
 
                 var selectedItems = selectionManager.GetSelectedItems(scope);
 
-                Assert.AreEqual(0, selectedItems.Count);
-                
+                Assert.AreEqual(0, selectedItems.Length);
+
                 var selectedItem = selectionManager.GetSelectedItem(scope);
 
                 Assert.AreEqual(0, selectedItem);
