@@ -1,4 +1,1 @@
-﻿namespace Orc.SelectionManagement
-{
-
-}
+﻿namespace Orc.SelectionManagement;
