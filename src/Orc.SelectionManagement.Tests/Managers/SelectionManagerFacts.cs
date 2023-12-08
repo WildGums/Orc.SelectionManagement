@@ -11,7 +11,7 @@ public class SelectionManagerFacts
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void AddMultipleItemsWithMultiSelectEnabledAndEmptyStart(string scope)
+        public void AddMultipleItemsWithMultiSelectEnabledAndEmptyStart(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -23,7 +23,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -31,29 +31,29 @@ public class SelectionManagerFacts
 
             selectionManager.Add(new[] { 1, 2, 3 }, scope);
 
-            Assert.AreEqual(3, addedItems.Count);
-            Assert.AreEqual(1, addedItems[0]);
-            Assert.AreEqual(2, addedItems[1]);
-            Assert.AreEqual(3, addedItems[2]);
+            Assert.That(addedItems.Count, Is.EqualTo(3));
+            Assert.That(addedItems[0], Is.EqualTo(1));
+            Assert.That(addedItems[1], Is.EqualTo(2));
+            Assert.That(addedItems[2], Is.EqualTo(3));
 
-            Assert.AreEqual(0, removedItems.Count);
+            Assert.That(removedItems.Count, Is.EqualTo(0));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(3, selectedItems.Length);
-            Assert.AreEqual(1, selectedItems[0]);
-            Assert.AreEqual(2, selectedItems[1]);
-            Assert.AreEqual(3, selectedItems[2]);
+            Assert.That(selectedItems.Length, Is.EqualTo(3));
+            Assert.That(selectedItems[0], Is.EqualTo(1));
+            Assert.That(selectedItems[1], Is.EqualTo(2));
+            Assert.That(selectedItems[2], Is.EqualTo(3));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(3, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(3));
         }
 
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void AddMultipleItemsWithMultiSelectEnabledAndFilledUpStart(string scope)
+        public void AddMultipleItemsWithMultiSelectEnabledAndFilledUpStart(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -67,7 +67,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -75,26 +75,26 @@ public class SelectionManagerFacts
 
             selectionManager.Add(new[] { 1, 2, 3 }, scope);
 
-            Assert.AreEqual(3, addedItems.Count);
-            Assert.AreEqual(1, addedItems[0]);
-            Assert.AreEqual(2, addedItems[1]);
-            Assert.AreEqual(3, addedItems[2]);
+            Assert.That(addedItems.Count, Is.EqualTo(3));
+            Assert.That(addedItems[0], Is.EqualTo(1));
+            Assert.That(addedItems[1], Is.EqualTo(2));
+            Assert.That(addedItems[2], Is.EqualTo(3));
 
-            Assert.AreEqual(0, removedItems.Count);
+            Assert.That(removedItems.Count, Is.EqualTo(0));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(6, selectedItems.Length);
-            Assert.AreEqual(4, selectedItems[0]);
-            Assert.AreEqual(5, selectedItems[1]);
-            Assert.AreEqual(6, selectedItems[2]);
-            Assert.AreEqual(1, selectedItems[3]);
-            Assert.AreEqual(2, selectedItems[4]);
-            Assert.AreEqual(3, selectedItems[5]);
+            Assert.That(selectedItems.Length, Is.EqualTo(6));
+            Assert.That(selectedItems[0], Is.EqualTo(4));
+            Assert.That(selectedItems[1], Is.EqualTo(5));
+            Assert.That(selectedItems[2], Is.EqualTo(6));
+            Assert.That(selectedItems[3], Is.EqualTo(1));
+            Assert.That(selectedItems[4], Is.EqualTo(2));
+            Assert.That(selectedItems[5], Is.EqualTo(3));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(3, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(3));
         }
 
         [TestCase(null)]
@@ -112,7 +112,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -120,25 +120,25 @@ public class SelectionManagerFacts
 
             selectionManager.Add(new[] { 1, 2, 3 }, scope);
 
-            Assert.AreEqual(1, addedItems.Count);
-            Assert.AreEqual(3, addedItems[0]);
+            Assert.That(addedItems.Count, Is.EqualTo(1));
+            Assert.That(addedItems[0], Is.EqualTo(3));
 
-            Assert.AreEqual(0, removedItems.Count);
+            Assert.That(removedItems.Count, Is.EqualTo(0));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(1, selectedItems.Length);
-            Assert.AreEqual(3, selectedItems[0]);
+            Assert.That(selectedItems.Length, Is.EqualTo(1));
+            Assert.That(selectedItems[0], Is.EqualTo(3));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(3, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(3));
         }
 
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void AddMultipleItemsWithMultiSelectDisabledAndFilledUpStart(string scope)
+        public void AddMultipleItemsWithMultiSelectDisabledAndFilledUpStart(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -152,7 +152,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -160,20 +160,20 @@ public class SelectionManagerFacts
 
             selectionManager.Add(new[] { 1, 2, 3 }, scope);
 
-            Assert.AreEqual(1, addedItems.Count);
-            Assert.AreEqual(3, addedItems[0]);
+            Assert.That(addedItems.Count, Is.EqualTo(1));
+            Assert.That(addedItems[0], Is.EqualTo(3));
 
-            Assert.AreEqual(1, removedItems.Count);
-            Assert.AreEqual(6, removedItems[0]);
+            Assert.That(removedItems.Count, Is.EqualTo(1));
+            Assert.That(removedItems[0], Is.EqualTo(6));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(1, selectedItems.Length);
-            Assert.AreEqual(3, selectedItems[0]);
+            Assert.That(selectedItems.Length, Is.EqualTo(1));
+            Assert.That(selectedItems[0], Is.EqualTo(3));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(3, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(3));
         }
     }
 
@@ -183,7 +183,7 @@ public class SelectionManagerFacts
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void RemoveMultipleItemsWithMultiSelectEnabledAndFilledUpStart_ExistingItems(string scope)
+        public void RemoveMultipleItemsWithMultiSelectEnabledAndFilledUpStart_ExistingItems(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -197,7 +197,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -205,26 +205,26 @@ public class SelectionManagerFacts
 
             selectionManager.Remove(new[] { 4, 5, 6 }, scope);
 
-            Assert.AreEqual(0, addedItems.Count);
+            Assert.That(addedItems.Count, Is.EqualTo(0));
 
-            Assert.AreEqual(3, removedItems.Count);
-            Assert.AreEqual(4, removedItems[0]);
-            Assert.AreEqual(5, removedItems[1]);
-            Assert.AreEqual(6, removedItems[2]);
+            Assert.That(removedItems.Count, Is.EqualTo(3));
+            Assert.That(removedItems[0], Is.EqualTo(4));
+            Assert.That(removedItems[1], Is.EqualTo(5));
+            Assert.That(removedItems[2], Is.EqualTo(6));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(0, selectedItems.Length);
+            Assert.That(selectedItems.Length, Is.EqualTo(0));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(0, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(0));
         }
 
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void RemoveMultipleItemsWithMultiSelectEnabledAndFilledUpStart_MissingItems(string scope)
+        public void RemoveMultipleItemsWithMultiSelectEnabledAndFilledUpStart_MissingItems(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -238,7 +238,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -246,19 +246,19 @@ public class SelectionManagerFacts
 
             selectionManager.Remove(new[] { 1, 2, 3 }, scope);
 
-            Assert.AreEqual(0, addedItems.Count);
-            Assert.AreEqual(0, removedItems.Count);
+            Assert.That(addedItems.Count, Is.EqualTo(0));
+            Assert.That(removedItems.Count, Is.EqualTo(0));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(3, selectedItems.Length);
-            Assert.AreEqual(4, selectedItems[0]);
-            Assert.AreEqual(5, selectedItems[1]);
-            Assert.AreEqual(6, selectedItems[2]);
+            Assert.That(selectedItems.Length, Is.EqualTo(3));
+            Assert.That(selectedItems[0], Is.EqualTo(4));
+            Assert.That(selectedItems[1], Is.EqualTo(5));
+            Assert.That(selectedItems[2], Is.EqualTo(6));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(6, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(6));
         }
     }
 
@@ -268,7 +268,7 @@ public class SelectionManagerFacts
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void ReplaceMultipleItemsWithMultiSelectEnabledAndFilledUpStart_ExistingItems(string scope)
+        public void ReplaceMultipleItemsWithMultiSelectEnabledAndFilledUpStart_ExistingItems(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -282,7 +282,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -290,26 +290,26 @@ public class SelectionManagerFacts
 
             selectionManager.Replace(new[] { 1, 2, 3 }, scope);
 
-            Assert.AreEqual(3, addedItems.Count);
-            Assert.AreEqual(1, addedItems[0]);
-            Assert.AreEqual(2, addedItems[1]);
-            Assert.AreEqual(3, addedItems[2]);
+            Assert.That(addedItems.Count, Is.EqualTo(3));
+            Assert.That(addedItems[0], Is.EqualTo(1));
+            Assert.That(addedItems[1], Is.EqualTo(2));
+            Assert.That(addedItems[2], Is.EqualTo(3));
 
-            Assert.AreEqual(3, removedItems.Count);
-            Assert.AreEqual(4, removedItems[0]);
-            Assert.AreEqual(5, removedItems[1]);
-            Assert.AreEqual(6, removedItems[2]);
+            Assert.That(removedItems.Count, Is.EqualTo(3));
+            Assert.That(removedItems[0], Is.EqualTo(4));
+            Assert.That(removedItems[1], Is.EqualTo(5));
+            Assert.That(removedItems[2], Is.EqualTo(6));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(3, selectedItems.Length);
-            Assert.AreEqual(1, selectedItems[0]);
-            Assert.AreEqual(2, selectedItems[1]);
-            Assert.AreEqual(3, selectedItems[2]);
+            Assert.That(selectedItems.Length, Is.EqualTo(3));
+            Assert.That(selectedItems[0], Is.EqualTo(1));
+            Assert.That(selectedItems[1], Is.EqualTo(2));
+            Assert.That(selectedItems[2], Is.EqualTo(3));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(3, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(3));
         }
 
         [TestCase]
@@ -337,7 +337,7 @@ public class SelectionManagerFacts
 
             selectionManager.Replace<object>(null);
 
-            Assert.AreEqual(0, selectionManager.GetSelectedItems().Length);
+            Assert.That(selectionManager.GetSelectedItems().Length, Is.EqualTo(0));
         }
     }
 
@@ -347,7 +347,7 @@ public class SelectionManagerFacts
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void ClearMultipleItemsWithMultiSelectEnabledAndFilledUpStart_ExistingItems(string scope)
+        public void ClearMultipleItemsWithMultiSelectEnabledAndFilledUpStart_ExistingItems(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
@@ -361,7 +361,7 @@ public class SelectionManagerFacts
 
             selectionManager.SelectionChanged += (sender, e) =>
             {
-                Assert.AreEqual(scope, e.Scope);
+                Assert.That(e.Scope, Is.EqualTo(scope));
 
                 addedItems.AddRange(e.Added);
                 removedItems.AddRange(e.Removed);
@@ -369,18 +369,18 @@ public class SelectionManagerFacts
 
             selectionManager.Clear(scope);
 
-            Assert.AreEqual(3, removedItems.Count);
-            Assert.AreEqual(4, removedItems[0]);
-            Assert.AreEqual(5, removedItems[1]);
-            Assert.AreEqual(6, removedItems[2]);
+            Assert.That(removedItems.Count, Is.EqualTo(3));
+            Assert.That(removedItems[0], Is.EqualTo(4));
+            Assert.That(removedItems[1], Is.EqualTo(5));
+            Assert.That(removedItems[2], Is.EqualTo(6));
 
             var selectedItems = selectionManager.GetSelectedItems(scope);
 
-            Assert.AreEqual(0, selectedItems.Length);
+            Assert.That(selectedItems.Length, Is.EqualTo(0));
 
             var selectedItem = selectionManager.GetSelectedItem(scope);
 
-            Assert.AreEqual(0, selectedItem);
+            Assert.That(selectedItem, Is.EqualTo(0));
         }
     }
 }
