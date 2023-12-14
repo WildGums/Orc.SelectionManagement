@@ -1,22 +1,21 @@
-﻿namespace Orc.SelectionManagement
+﻿namespace Orc.SelectionManagement;
+
+using System;
+using System.Collections.Generic;
+
+public interface ISelectionManager<T>
 {
-    using System;
-    using System.Collections.Generic;
+    bool AllowMultiSelect { get; set; }
 
-    public interface ISelectionManager<T>
-    {
-        bool AllowMultiSelect { get; set; }
+    event EventHandler<SelectionChangedEventArgs<T>>? SelectionChanged;
 
-        event EventHandler<SelectionChangedEventArgs<T>> SelectionChanged;
+    T[] GetSelectedItems(string? scope = null);
 
-        List<T> GetSelectedItems(string scope = null);
+    void Add(IEnumerable<T> items, string? scope = null);
 
-        void Add(IEnumerable<T> items, string scope = null);
+    void Replace(IEnumerable<T> items, string? scope = null);
 
-        void Replace(IEnumerable<T> items, string scope = null);
+    void Remove(IEnumerable<T> items, string? scope = null);
 
-        void Remove(IEnumerable<T> items, string scope = null);
-
-        void Clear(string scope = null);
-    }
+    void Clear(string? scope = null);
 }

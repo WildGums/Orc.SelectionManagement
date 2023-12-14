@@ -1,31 +1,21 @@
-﻿namespace Orc.SelectionManagement
+﻿namespace Orc.SelectionManagement;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class SelectionChangedEventArgs<T> : EventArgs
 {
-    using System;
-    using System.Collections.Generic;
-
-    public class SelectionChangedEventArgs<T> : EventArgs
+    public SelectionChangedEventArgs(IEnumerable<T>? added, IEnumerable<T>? removed, string? scope)
     {
-        public SelectionChangedEventArgs(IEnumerable<T> added, IEnumerable<T> removed, string scope)
-        {
-            Added = new List<T>();
-            Removed = new List<T>();
-            Scope = scope;
-
-            if (added is not null)
-            {
-                Added.AddRange(added);
-            }
-
-            if (removed is not null)
-            {
-                Removed.AddRange(removed);
-            }
-        }
-
-        public List<T> Added { get; private set; }
-
-        public List<T> Removed { get; private set; }
-
-        public string Scope { get; private set; }
+        Added = added?.ToArray() ?? Array.Empty<T>();
+        Removed = removed?.ToArray() ?? Array.Empty<T>();
+        Scope = scope;
     }
+
+    public T[] Added { get; private set; }
+
+    public T[] Removed { get; private set; }
+
+    public string? Scope { get; private set; }
 }

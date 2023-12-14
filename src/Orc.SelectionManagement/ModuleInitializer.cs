@@ -19,7 +19,7 @@ public static class ModuleInitializer
         //serviceLocator.RegisterType(typeof(ISelectionManager<object>), typeof(SelectionManager<object>));
         //serviceLocator.RegisterType(typeof(ISelectionManager<int>), typeof(SelectionManager<int>));
 
-        var languageService = serviceLocator.ResolveType<ILanguageService>();
+        var languageService = serviceLocator.ResolveRequiredType<ILanguageService>();
         languageService.RegisterLanguageSource(new LanguageResourceSource("Orc.SelectionManagement", "Orc.SelectionManagement.Properties", "Resources"));
     }
 }
