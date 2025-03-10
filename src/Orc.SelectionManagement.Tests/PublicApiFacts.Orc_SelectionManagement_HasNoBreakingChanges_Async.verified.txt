@@ -12,7 +12,7 @@ namespace Orc.SelectionManagement
         public static T? GetRequiredSelectedItem<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, string? scope = null) { }
         public static T? GetSelectedItem<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, string? scope = null) { }
         public static void Remove<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string? scope = null) { }
-        public static void Replace<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T item, string? scope = null) { }
+        public static void Replace<T>(this Orc.SelectionManagement.ISelectionManager<T> selectionManager, T? item, string? scope = null) { }
     }
     public interface ISelectionManager<T>
     {
