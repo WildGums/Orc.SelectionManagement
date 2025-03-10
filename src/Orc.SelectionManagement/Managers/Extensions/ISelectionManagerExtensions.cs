@@ -37,7 +37,7 @@ public static class ISelectionManagerExtensions
         selectionManager.Add(new[] { item }, scope);
     }
 
-    public static void Replace<T>(this ISelectionManager<T> selectionManager, T item, string? scope = null)
+    public static void Replace<T>(this ISelectionManager<T> selectionManager, T? item, string? scope = null)
     {
         ArgumentNullException.ThrowIfNull(selectionManager);
 
