@@ -12,7 +12,7 @@ public static class ISelectionManagerExtensions
         return selectionManager.GetSelectedItems(scope).LastOrDefault();
     }
 
-    public static T? GetRequiredSelectedItem<T>(this ISelectionManager<T> selectionManager, string? scope = null)
+    public static T GetRequiredSelectedItem<T>(this ISelectionManager<T> selectionManager, string? scope = null)
     {
         ArgumentNullException.ThrowIfNull(selectionManager);
 
