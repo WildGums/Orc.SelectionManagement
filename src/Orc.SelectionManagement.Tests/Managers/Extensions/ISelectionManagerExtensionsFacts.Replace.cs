@@ -1,7 +1,7 @@
 ﻿namespace Orc.SelectionManagement.Tests.Managers
 {
     using System.Threading.Tasks;
-    using Moq;
+    using Microsoft.Extensions.Logging.Abstractions;
     using NUnit.Framework;
 
     public partial class ISelectionManagerExtensionsFacts
@@ -10,9 +10,9 @@
         public class The_Replace_Method
         {
             [Test]
-            public async Task Replaces_Selection_With_Value_Async()
+            public async Task Replaces_Selection_With_Value()
             {
-                var selectionManager = new SelectionManager<object>();
+                var selectionManager = new SelectionManager<object>(NullLogger<SelectionManager<object>>.Instance);
 
                 selectionManager.Add(new object());
 
@@ -28,9 +28,9 @@
             }
 
             [Test]
-            public async Task Clears_Selection_With_Null_Value_Async()
+            public async Task Clears_Selection_With_Null_Value()
             {
-                var selectionManager = new SelectionManager<object>();
+                var selectionManager = new SelectionManager<object>(NullLogger<SelectionManager<object>>.Instance);
 
                 selectionManager.Add(new object());
 

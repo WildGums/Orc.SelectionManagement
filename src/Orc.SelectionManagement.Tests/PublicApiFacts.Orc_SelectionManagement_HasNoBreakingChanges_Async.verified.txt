@@ -25,6 +25,10 @@ namespace Orc.SelectionManagement
         void Remove(System.Collections.Generic.IEnumerable<T> items, string? scope = null);
         void Replace(System.Collections.Generic.IEnumerable<T> items, string? scope = null);
     }
+    public static class OrcSelectionManagementModule
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcSelectionManagement(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
+    }
     public class SelectionChangedEventArgs<T> : System.EventArgs
     {
         public SelectionChangedEventArgs(System.Collections.Generic.IEnumerable<T>? added, System.Collections.Generic.IEnumerable<T>? removed, string? scope) { }
@@ -34,7 +38,7 @@ namespace Orc.SelectionManagement
     }
     public class SelectionManager<T> : Orc.SelectionManagement.ISelectionManager<T>
     {
-        public SelectionManager() { }
+        public SelectionManager(Microsoft.Extensions.Logging.ILogger<Orc.SelectionManagement.SelectionManager<T>> logger) { }
         public bool AllowMultiSelect { get; set; }
         public event System.EventHandler<Orc.SelectionManagement.SelectionChangedEventArgs<T>>? SelectionChanged;
         public void Add(System.Collections.Generic.IEnumerable<T> items, string? scope = null) { }

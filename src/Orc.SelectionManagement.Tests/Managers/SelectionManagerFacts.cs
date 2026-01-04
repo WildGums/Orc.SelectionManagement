@@ -1,6 +1,7 @@
 ﻿namespace Orc.SelectionManagement.Test.Managers;
 
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging.Abstractions;
 using NUnit.Framework;
 
 public class SelectionManagerFacts
@@ -11,12 +12,12 @@ public class SelectionManagerFacts
         [TestCase(null)]
         [TestCase("A")]
         [TestCase("B")]
-        public void AddMultipleItemsWithMultiSelectEnabledAndEmptyStart(string? scope)
+        public void Add_Multiple_Items_With_Multi_Select_Enabled_And_Empty_Start(string? scope)
         {
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = true
             };
@@ -58,7 +59,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = true
             };
@@ -105,7 +106,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = false
             };
@@ -143,7 +144,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = false
             };
@@ -188,7 +189,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = true
             };
@@ -229,7 +230,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = true
             };
@@ -273,7 +274,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = true
             };
@@ -313,12 +314,12 @@ public class SelectionManagerFacts
         }
 
         [TestCase]
-        public void SingleReplaceWithNullShouldClearSelection()
+        public void Single_Replace_With_Null_Should_Clear_Selection()
         {
             var addedItems = new List<object>();
             var removedItems = new List<object>();
 
-            var selectionManager = new SelectionManager<object>
+            var selectionManager = new SelectionManager<object>(NullLogger<SelectionManager<object>>.Instance)
             {
                 AllowMultiSelect = true
             };
@@ -352,7 +353,7 @@ public class SelectionManagerFacts
             var addedItems = new List<int>();
             var removedItems = new List<int>();
 
-            var selectionManager = new SelectionManager<int>
+            var selectionManager = new SelectionManager<int>(NullLogger<SelectionManager<int>>.Instance)
             {
                 AllowMultiSelect = true
             };

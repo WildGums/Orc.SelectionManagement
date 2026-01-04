@@ -3,21 +3,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Catel.Logging;
+using Microsoft.Extensions.Logging;
 
 public class SelectionManager<T> : ISelectionManager<T>
 {
-    private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+    private readonly ILogger<SelectionManager<T>> _logger;
 
     private readonly object _lockObject = new();
     private readonly Dictionary<string, SelectionList<T>> _selectionsByScope = new();
     private readonly SelectionList<T> _noScopeSelections;
-
     private bool _allowMultiSelect = true;
 
-    public SelectionManager()
+    public SelectionManager(ILogger<SelectionManager<T>> logger)
     {
         _noScopeSelections = CreateSelectionList(null);
+        _logger = logger;
     }
 
     public bool AllowMultiSelect
@@ -27,7 +27,7 @@ public class SelectionManager<T> : ISelectionManager<T>
         {
             if (_allowMultiSelect != value)
             {
-                Log.Debug($"Updating 'AllowMultiSelect' to '{value}'");
+                _logger.LogDebug($"Updating 'AllowMultiSelect' to '{value}'");
 
                 _allowMultiSelect = value;
 
@@ -137,7 +137,7 @@ public class SelectionManager<T> : ISelectionManager<T>
             stringBuilder.AppendLine($"    - ({removed})");
         }
 
-        Log.Debug(stringBuilder.ToString());
+        _logger.LogDebug(stringBuilder.ToString());
 
         SelectionChanged?.Invoke(this, e);
     }
