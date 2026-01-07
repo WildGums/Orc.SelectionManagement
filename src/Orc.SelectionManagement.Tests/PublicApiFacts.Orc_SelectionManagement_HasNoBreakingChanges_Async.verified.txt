@@ -5,6 +5,13 @@ public static class ModuleInitializer
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void Initialize() { }
 }
+namespace Orc
+{
+    public static class OrcSelectionManagementModule
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcSelectionManagement(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
+    }
+}
 namespace Orc.SelectionManagement
 {
     public static class ISelectionManagerExtensions
@@ -24,10 +31,6 @@ namespace Orc.SelectionManagement
         T[] GetSelectedItems(string? scope = null);
         void Remove(System.Collections.Generic.IEnumerable<T> items, string? scope = null);
         void Replace(System.Collections.Generic.IEnumerable<T> items, string? scope = null);
-    }
-    public static class OrcSelectionManagementModule
-    {
-        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcSelectionManagement(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
     }
     public class SelectionChangedEventArgs<T> : System.EventArgs
     {
