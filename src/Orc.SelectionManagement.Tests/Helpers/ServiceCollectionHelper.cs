@@ -1,20 +1,19 @@
-﻿namespace Orc.SelectionManagement.Tests
+﻿namespace Orc.SelectionManagement.Tests;
+
+using Catel;
+using Microsoft.Extensions.DependencyInjection;
+using Orc.SelectionManagement;
+
+internal static class ServiceCollectionHelper
 {
-    using Catel;
-    using Microsoft.Extensions.DependencyInjection;
-    using Orc.SelectionManagement;
-
-    internal static class ServiceCollectionHelper
+    public static IServiceCollection CreateServiceCollection()
     {
-        public static IServiceCollection CreateServiceCollection()
-        {
-            var serviceCollection = new ServiceCollection();
+        var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddLogging();
-            serviceCollection.AddCatelCore();
-            serviceCollection.AddOrcSelectionManagement();
+        serviceCollection.AddLogging();
+        serviceCollection.AddCatelCore();
+        serviceCollection.AddOrcSelectionManagement();
 
-            return serviceCollection;
-        }
+        return serviceCollection;
     }
 }
