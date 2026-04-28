@@ -1,7 +1,4 @@
-using System.Runtime.CompilerServices;
-using Catel.IoC;
-using Catel.Services;
-using Orc.SelectionManagement;
+﻿using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Used by the ModuleInit. All code inside the Initialize method is ran as soon as the assembly is loaded.
@@ -14,14 +11,6 @@ public static class ModuleInitializer
     [ModuleInitializer]
     public static void Initialize()
     {
-        var serviceLocator = ServiceLocator.Default;
-
-        // Since Catel doesn't support open generics (yet?), add some defaults
-        serviceLocator.RegisterType(typeof(ISelectionManager<>), typeof(SelectionManager<>));
-        //serviceLocator.RegisterType(typeof(ISelectionManager<object>), typeof(SelectionManager<object>));
-        //serviceLocator.RegisterType(typeof(ISelectionManager<int>), typeof(SelectionManager<int>));
-
-        var languageService = serviceLocator.ResolveRequiredType<ILanguageService>();
-        languageService.RegisterLanguageSource(new LanguageResourceSource("Orc.SelectionManagement", "Orc.SelectionManagement.Properties", "Resources"));
+     
     }
 }

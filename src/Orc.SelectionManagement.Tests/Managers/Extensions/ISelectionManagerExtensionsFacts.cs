@@ -1,6 +1,5 @@
-﻿namespace Orc.SelectionManagement.Tests.Managers
+﻿namespace Orc.SelectionManagement.Tests.Managers;
+
+public partial class ISelectionManagerExtensionsFacts
 {
-    public partial class ISelectionManagerExtensionsFacts
-    {
-    }
 }

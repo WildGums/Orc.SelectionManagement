@@ -4,23 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Catel;
 using Catel.Collections;
-using Catel.Logging;
 using Catel.MVVM;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private static readonly ILog Log = LogManager.GetCurrentClassLogger();
-
     private readonly ISelectionManager<int> _intSelectionManager;
     private readonly ISelectionManager<string> _stringSelectionManager;
 
-    public MainWindowViewModel(ISelectionManager<int> intSelectionManager, ISelectionManager<string> stringSelectionManager)
+    public MainWindowViewModel(IServiceProvider serviceProvider, 
+        ISelectionManager<int> intSelectionManager, ISelectionManager<string> stringSelectionManager)
+        : base(serviceProvider)
     {
-        ArgumentNullException.ThrowIfNull(intSelectionManager);
-        ArgumentNullException.ThrowIfNull(stringSelectionManager);
-
         _intSelectionManager = intSelectionManager;
         _stringSelectionManager = stringSelectionManager;
 
@@ -37,10 +32,10 @@ public class MainWindowViewModel : ViewModelBase
         Strings = strings;
         Ints = ints;
 
-        SelectedStringsWithoutScope = new ObservableCollection<string>();
-        SelectedStringsWithScope = new ObservableCollection<string>();
-        SelectedIntsWithoutScope = new ObservableCollection<int>();
-        SelectedIntsWithScope = new ObservableCollection<int>();
+        SelectedStringsWithoutScope = new System.Collections.ObjectModel.ObservableCollection<string>();
+        SelectedStringsWithScope = new System.Collections.ObjectModel.ObservableCollection<string>();
+        SelectedIntsWithoutScope = new System.Collections.ObjectModel.ObservableCollection<int>();
+        SelectedIntsWithScope = new System.Collections.ObjectModel.ObservableCollection<int>();
     }
 
     public override string Title => "Orc.SelectionManagement example";
@@ -49,15 +44,15 @@ public class MainWindowViewModel : ViewModelBase
 
     public List<string> Strings { get; }
 
-    public ObservableCollection<string> SelectedStringsWithoutScope { get; }
+    public System.Collections.ObjectModel.ObservableCollection<string> SelectedStringsWithoutScope { get; }
 
-    public ObservableCollection<string> SelectedStringsWithScope { get; }
+    public System.Collections.ObjectModel.ObservableCollection<string> SelectedStringsWithScope { get; }
 
     public List<int> Ints { get; }
 
-    public ObservableCollection<int> SelectedIntsWithoutScope { get; }
+    public System.Collections.ObjectModel.ObservableCollection<int> SelectedIntsWithoutScope { get; }
 
-    public ObservableCollection<int> SelectedIntsWithScope { get; }
+    public System.Collections.ObjectModel.ObservableCollection<int> SelectedIntsWithScope { get; }
 
     protected override async Task InitializeAsync()
     {

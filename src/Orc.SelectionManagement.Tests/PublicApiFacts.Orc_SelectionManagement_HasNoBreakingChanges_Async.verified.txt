@@ -5,6 +5,13 @@ public static class ModuleInitializer
     [System.Runtime.CompilerServices.ModuleInitializer]
     public static void Initialize() { }
 }
+namespace Orc
+{
+    public static class OrcSelectionManagementModule
+    {
+        public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddOrcSelectionManagement(this Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection) { }
+    }
+}
 namespace Orc.SelectionManagement
 {
     public static class ISelectionManagerExtensions
@@ -34,7 +41,7 @@ namespace Orc.SelectionManagement
     }
     public class SelectionManager<T> : Orc.SelectionManagement.ISelectionManager<T>
     {
-        public SelectionManager() { }
+        public SelectionManager(Microsoft.Extensions.Logging.ILogger<Orc.SelectionManagement.SelectionManager<T>> logger) { }
         public bool AllowMultiSelect { get; set; }
         public event System.EventHandler<Orc.SelectionManagement.SelectionChangedEventArgs<T>>? SelectionChanged;
         public void Add(System.Collections.Generic.IEnumerable<T> items, string? scope = null) { }
