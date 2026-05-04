@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Extensions.Logging;
 
 public class SelectionManager<T> : ISelectionManager<T>
@@ -27,7 +26,7 @@ public class SelectionManager<T> : ISelectionManager<T>
         {
             if (_allowMultiSelect != value)
             {
-                _logger.LogDebug($"Updating 'AllowMultiSelect' to '{value}'");
+                _logger.LogDebug("Updating 'AllowMultiSelect' to '{AllowMultiSelect}'", value);
 
                 _allowMultiSelect = value;
 
@@ -119,25 +118,8 @@ public class SelectionManager<T> : ISelectionManager<T>
 
     private void OnSelectionListSelectionChanged(object? sender, SelectionChangedEventArgs<T> e)
     {
-        var stringBuilder = new StringBuilder();
-
-        stringBuilder.AppendLine($"Selection has changed for scope '{e.Scope}':");
-
-        stringBuilder.AppendLine($"  Added: ({e.Added.Length})");
-
-        foreach (var added in e.Added)
-        {
-            stringBuilder.AppendLine($"    - ({added})");
-        }
-
-        stringBuilder.AppendLine($"  Removed: ({e.Removed.Length})");
-
-        foreach (var removed in e.Removed)
-        {
-            stringBuilder.AppendLine($"    - ({removed})");
-        }
-
-        _logger.LogDebug(stringBuilder.ToString());
+        _logger.LogDebug("Selection has changed for scope '{Scope}' | Added ({AddedCount}): [{Added}] | Removed ({RemovedCount}): [{Removed}]",
+            e.Scope, e.Added.Length, string.Join(", ", e.Added), e.Removed.Length, string.Join(", ", e.Removed));
 
         SelectionChanged?.Invoke(this, e);
     }
